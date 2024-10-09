@@ -68,7 +68,9 @@ export class AuthService {
   //
 
   /**
-   * Fetch all users from the database
+   *  Fetch all users from the database
+   *  Returns an array of user objects with password hashed
+   *  When making use of this comment out for production as it's for testing alone
    */
 
   async getall(): Promise<User[]> {
