@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -12,6 +13,7 @@ import {
   Post,
   Put,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -24,6 +26,7 @@ export class ProductController {
   ) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
   async create(
     @Body() createProductDto: CreateProductDto,
@@ -42,16 +45,18 @@ export class ProductController {
     return this.productService.create(createProductDto);
   }
 
-  @Get() findAll() {
+  @Get() @UseGuards(JwtAuthGuard) findAll() {
     return this.productService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.productService.findOne(id);
   }
 
   @Put(':id')
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
   async update(
     @Param('id') id: string,
@@ -71,7 +76,7 @@ export class ProductController {
     return this.productService.update(id, updateProductDto);
   }
 
-  @Delete(':id') remove(@Param('id') id: string) {
+  @Delete(':id') @UseGuards(JwtAuthGuard) remove(@Param('id') id: string) {
     return this.productService.remove(id);
   }
 }
