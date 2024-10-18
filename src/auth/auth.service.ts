@@ -26,7 +26,7 @@ export class AuthService {
     const userExists = await this.userModel.findOne({ email });
 
     if (userExists) {
-      throw new BadRequestException('User already exists');
+      throw new BadRequestException('Invalid signup details');
     }
 
     const hashedpassword = await bcrypt.hash(password, 10);
@@ -72,8 +72,4 @@ export class AuthService {
    *  Returns an array of user objects with password hashed
    *  When making use of this comment out for production as it's for testing alone
    */
-
-  async getall(): Promise<User[]> {
-    return await this.userModel.find().exec();
-  }
 }

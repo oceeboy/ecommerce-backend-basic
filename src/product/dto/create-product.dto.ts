@@ -17,4 +17,8 @@ export class CreateProductDto {
   @IsOptional() // Make it optional in case no image is uploaded
   @IsString()
   image?: string; // Use "?" to mark it as optional
+
+  @IsNotEmpty()
+  @IsString()
+  category: string;
 }
