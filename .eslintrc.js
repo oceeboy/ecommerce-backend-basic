@@ -15,7 +15,10 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: [
+    'dist/**/*', // Ignore all files in the dist folder
+    '.eslintrc.js', // Ignore the ESLint config file itself
+  ],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
